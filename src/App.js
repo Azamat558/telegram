@@ -1,24 +1,28 @@
 import logo from './logo.svg';
 import './App.css';
+import { useEffect, useState } from 'react';
 
 function App() {
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const initData = window.Telegram.WebApp.initDataUnsafe;
+    setUser(initData.user);
+    window.Telegram.WebApp.ready();
+  }, []);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <header className="App-header">
+      <h1>Welcome to Telegram WebApp!</h1>
+      {user && (
+        <div>
+          <p>Username: {user.username}</p>
+          <p>First Name: {user.first_name}</p>
+          <p>Last Name: {user.last_name}</p>
+        </div>
+      )}
+    </header>
+  </div>
   );
 }
 
