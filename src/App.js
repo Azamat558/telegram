@@ -8,6 +8,7 @@ function App() {
     const initData = window.Telegram.WebApp.initDataUnsafe;
     setUser(initData.user);
     window.Telegram.WebApp.ready();
+    console.log('telega')
   }, []);
   return (
     <div className="App">
